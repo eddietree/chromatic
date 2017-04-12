@@ -163,7 +163,7 @@ function initSynths() {
         });
 
         //var chorus = new Tone.Chorus("3n", 1.0, 0.75);
-        //var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5);
+        var feedbackDelay = new Tone.FeedbackDelay("8n", 0.5);
         //var filter = new Tone.Filter(1000, "lowpass");
         //var eq = new Tone.EQ3(-30.0,-10.0,0.0);
 
@@ -171,7 +171,7 @@ function initSynths() {
             synth,
             //eq
             //chorus,
-            //feedbackDelay,
+            feedbackDelay,
             //filter,
         ];
 
