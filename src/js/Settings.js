@@ -1,0 +1,16 @@
+module.exports = {
+	debug: false,
+	showGui: false,
+	doSplashSeq: true,
+	version: '0.1',
+	clearColor: 0x000000,
+	//clearColor: 0x363141,
+	cameraFOV: 40.0,
+	antialias: false,
+	audioVolume: 0.0,
+	audioMute: false,
+	audioBPM: 120,
+	audioStartNote: "1n",
+	audioMasteringEnable : true,
+	disableAudioIOS : true,
+};

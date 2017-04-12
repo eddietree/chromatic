@@ -1,0 +1,135 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,  height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="description" content="Chromatic - A WebVR experiment created with realtime shaders and generative audio.">
+  <meta name="author" content="eddietree">
+  <meta name="keywords" content="VR, vive, oculus, google, daydream, webvr">
+  <meta property="og:type" content="product" /> 
+  <meta property="og:url" content="https://chromatic.funktroniclabs.com" /> 
+  <meta property="og:title" content="Chromatic (VR)" /> 
+  <meta property="og:description" content="Chromatic - A WebVR experiment created with realtime shaders and generative audio." /> 
+  <meta property="og:image" content="https://chromatic.funktroniclabs.com/res/img/meta-promo.png" /> 
+  <meta property="fb:profile_id" content="522544297807617" /> 
+  <meta property="fb:app_id" content="206508926482195" />
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://chromatic.funktroniclabs.com"> 
+  <meta name="twitter:title" content="Chromatic (VR)">
+  <meta name="twitter:description" content="Chromatic - A WebVR experiment created with realtime shaders and generative audio.">
+  <meta name="twitter:image" content="https://chromatic.funktroniclabs.com/res/img/meta-promo.png">
+
+  <!-- Origin Trial Token, feature = WebVR, origin = https://funktroniclabs.com, expires = 2017-04-28 -->
+  <meta http-equiv="origin-trial" data-feature="WebVR" data-expires="2017-04-28" content="Amdmc3A66S+CjQ1yWi0XHE9nyz8xhDamALdZ5GZqF+MgC9blxL8myo9azd6k7fhuGVUIxOw4dhOXDlDuLduEBwEAAABkeyJvcmlnaW4iOiJodHRwczovL2Z1bmt0cm9uaWNsYWJzLmNvbTo0NDMiLCJmZWF0dXJlIjoiV2ViVlIiLCJleHBpcnkiOjE0OTM0MDEwMDIsImlzU3ViZG9tYWluIjp0cnVlfQ==">
+
+  <title>Chromatic (VR)</title>
+  
+  <link href="css/main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link rel="icon" href="res/img/favicon.png">
+
+</head>
+
+<body>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-40640743-11', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  <div id="content">
+    <div id="buttons">
+      <button id="resetVR">Recenter</button> 
+      <button id="muteAudio">Mute Audio</button>
+    </div>
+
+    <div id="stats">
+    </div>
+
+    <div id="infobtn">
+      <a href="#">
+        <img draggable="false" src="./res/img/info_btn.png"/>
+      </a>
+    </div>
+
+    <div id="infowall">
+      <div id="infobtn-quit">
+        <a href="#">
+          <img draggable="false" src="./res/img/info-quit.png"/>
+        </a>
+        </div>
+
+      <div id="infowall-content">
+        <h1>Chromatic</h1>
+
+        <p>Chromatic VR is an WebVR audiovisual experiment created using realtime shaders and generative audio. Watch iridescent shards of light unfurl into procedurally generated prismatic realms and meditative soundscapes.</p>
+
+        <p>(Audio optimized for Android and desktop, disabled on iOS)</p>
+
+        <p>Contributors: <a href="https://www.eddietree.com/" target="_blank">Eddie Lee</a>, <a href="https://www.tetramid.co/" target="_blank">Tetra Von Orden</a>, <a href="https://soundcloud.com/eric_cheng/" target="_blank">Eric Cheng</a></p>
+        <p>Technologies: <a href="https://threejs.org/" target="_blank">three.js</a>, <a href="https://tonejs.github.io/" target="_blank">Tone.js</a>, <a href="https://googlevr.github.io/webvr-ui/" target="_blank">webvr-ui</a>
+
+        <br/>
+        Source: <a href="https://github.com/eddietree/chromatic/" target="_blank">Github</a>. See other <a href="https://webvrexperiments.com/" target="_blank">WebVR Experiments</a></p>
+      </div>
+    </div>
+
+
+    <div id="putOnVR">
+      <img draggable="false" src="./res/img/logo.png"/>
+    </div>
+
+    <div id="icons">
+      <a href="http://webvrexperiments.com" target="_blank" id="iconwebvr">
+        <img draggable="false" src="./res/img/FinalBadge.png"/>
+      </a>
+
+      <a href="https://funktroniclabs.com" target="_blank" id="iconfunk">
+        <img draggable="false" src="./res/img/funktronic-logo.png"/>
+      </a>
+    </div>
+
+    <div id="desc"> 
+     <p id="desc_text">A WebVR experiment created with realtime shaders and generative audio.</p>
+
+      <div id="btns">
+        <div class="btn" id="toggleVR"></div>
+        <!--<div class="btn" id="fullscreen"></div>-->
+        <br/><div id="enter360">Try without a headset</div>
+        <div style="clear:both"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    WebVRConfig = {
+      BUFFER_SCALE: 0.5,
+    };
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    });
+  </script>
+
+  <script src="lib/three/three.min.js"></script>
+  <script src="lib/webvr/webvr-polyfill.js"></script>
+  <script src="lib/webvr/webvr-ui.js"></script>
+  <script src="lib/webvr/VRControls.js"></script>
+  <script src="lib/webvr/VREffect.js"></script>
+  <script src="lib/CubemapToEquirectangular.js"></script>
+  <script src="lib/Tone.min.js"></script>
+  <script src="lib/NoSleep.min.js"></script>
+  <script src="js/Main.js"></script>
+  <!--<script src="http://192.168.1.10:8080/target/target-script-min.js#anonymous"></script>-->
+
+</body>
+</html>

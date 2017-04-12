@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>VR Test</title>
+  
+  <meta name="viewport" content="width=device-width,  height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="description" content="VR Test">
+  <meta name="author" content="Eddie">
+
+  <style>
+
+  #startaudio {
+  	color: black;
+  	background-color: orange;
+  	text-align: center;
+  	padding: 20px;
+  	border: 1px solid black;
+  }
+  </style>
+</head>
+
+<body>
+	<div id="startaudio">
+		Start Audio
+	</div>
+</body>
+
+<script>
+
+	function randBetweenInt(minVal, maxVal) {
+        return Math.floor(minVal + (maxVal - minVal) * Math.random());
+    }
+
+	window.onload = function()
+	{
+		function createSynth()
+		{
+			let synth = new Tone.DuoSynth();
+
+	        synth.set({
+	            "volume":  3.0,
+	            //"portamento": 0.02,
+	            "harmonicity": 1.5,
+	            "vibratoAmount": 0.2,
+	            "vibratoRate": "4n",
+
+	            "voice0": {
+	                "oscillator": {
+	                    "type": "sine"
+	                },
+	                "envelope": {
+	                    "attack": 1,
+	                    "decay": 1,
+	                    "sustain": 0.8,
+	                    "release": 0.1
+	                },
+	            },
+	            "voice1": {
+	                "oscillator": {
+	                    "type": "sine"
+	                },
+	                "envelope": {
+	                    "attack": 1,
+	                    "decay": 1,
+	                    "sustain": 0.8,
+	                    "release": 0.1
+	                },
+	            }
+	        });
+
+	        synth.connect(Tone.Master);
+
+	        var timeDelay = 7.0;
+
+	        let notes = [ "G3", "C4", "E4", "G4"];
+	        let loop = new Tone.Loop(function(time) {
+	            let note = notes[randBetweenInt(0, notes.length)];
+	            synth.triggerAttackRelease(note, timeDelay, time);
+	        }, timeDelay);
+	        loop.start("1n");
+
+	        /*synth.triggerAttackRelease("C4", 0.0, 0.0);
+	        synth.triggerAttackRelease("E4", 0.0, 0.0);*/
+		}
+
+		createSynth();
+		//createSynth();
+		//createSynth();
+
+        Tone.Transport.bpm.value = 120;
+    	Tone.Transport.start();
+
+    	StartAudioContext(Tone.context, "#startaudio", function(){
+    		document.body.style.background = "gray";
+    	});
+	};
+
+</script>
+<script src="lib/Tone.min.js"></script>
+<script src="lib/StartAudioContext.js"></script>
+
+</html>

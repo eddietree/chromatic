@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>VR Test</title>
+  
+  <meta name="viewport" content="width=device-width,  height=device-height, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <meta name="description" content="VR Test">
+  <meta name="author" content="Eddie">
+
+  <style>
+
+
+  #text {
+	font-size: 3vw;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: gray;
+	text-align: center;
+	line-height: 1.5em;
+
+	width: 80%;
+}
+
+
+  </style>
+</head>
+
+<body>
+	<div id="text">
+	</div>
+</body>
+
+<script>
+
+	function debugWrite(text)
+	{
+		var elem = document.getElementById("text");
+		elem.innerHTML += text + "<br/>";
+	}
+
+	window.onload = function()
+	{
+		navigator.getVRDisplays().then(function(displays) {
+
+	            debugWrite('navigator.getVRDisplays() - number of VR displays found: ' + displays.length);
+
+	            for(var i =0; i < displays.length; ++i)
+	            {
+	            	debugWrite("[" + i + "] " + displays[i].displayName);
+	            }
+	        }).catch( reason => {console.log('getVRDisplays failed: ', reason ); });
+	};
+
+</script>
+<script src="lib/webvr/webvr-polyfill.js"></script>
+<script src="lib/webvr/webvr-ui.js"></script>
+
+</html>

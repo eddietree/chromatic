@@ -1,0 +1,4 @@
+src/node_modules/*
+
+src/npm-debug.log
+public/*

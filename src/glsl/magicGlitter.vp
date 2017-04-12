@@ -1,0 +1,50 @@
+//varying vec2 vUv;
+
+uniform float uTime;
+uniform vec3 uCamPos;
+uniform float uPulsePosZ;
+
+varying vec3 vRandData;
+varying float vTime;
+varying float vPulsateCoeff;
+
+#pragma glslify: wrap = require(./func/wrap.glsl)
+ #pragma glslify: cubicPulse = require(./func/cubicPulse.glsl)
+
+const float PI = 3.14159;
+const float TWICE_PI = PI * 2.0;
+
+void main() {
+
+	//vNormal = normal;
+
+	vec3 randaDatPos = position;
+	vec3 randData = normal.xyz;
+
+	const float zMin = -30.0;
+	const float zMax = 3.0;
+	const float posRadiusMin= 0.6;
+	const float posRadiusMax = 10.0;
+	const float ptSizeMin = 5.0;
+	const float ptSizeMax = 40.0;
+
+	float distCoeff = wrap(randaDatPos.z * 100.0 - uTime * 0.025 * mix(0.5, 1.0, randaDatPos.z), 0.0, 1.0);
+	
+	float posZ = mix(zMin, zMax, distCoeff);
+	float angle = TWICE_PI *randaDatPos.y;
+	float radius = mix(posRadiusMin, posRadiusMax, randaDatPos.x*randaDatPos.x*randaDatPos.x) * distCoeff;
+
+	vec3 pos = vec3( cos(angle) * radius, sin(angle)* radius, posZ);
+
+	// calc size
+	float distToEye = length(pos - uCamPos);
+	float pointSize = mix(ptSizeMin, ptSizeMax, randData.x * randData.x);
+	float pulsateCoeff = cubicPulse(uPulsePosZ + 3.0, 3.0, pos.z);
+	pointSize += pulsateCoeff * 70.0;
+
+	gl_PointSize = pointSize / distToEye;
+	vPulsateCoeff = pulsateCoeff;
+    vTime = uTime;
+    vRandData = randData;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( pos, 1.0 );
+}

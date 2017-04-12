@@ -1,0 +1,80 @@
+attribute vec4 center;
+attribute vec4 data;
+
+uniform float uTime;
+uniform float uPulsePosZ;
+uniform float uInfiniteScalar;
+uniform vec4 uSwayParams;
+uniform vec4 uColorTint;
+uniform vec4 uColorParams;
+uniform vec4 uTubeParams;
+
+varying vec2 vUv;
+varying vec3 vNormal;
+varying vec3 vPosBase;
+varying vec3 vPosWorld;
+varying float vTime;
+varying float vNoise;
+varying vec4 vColorTint;
+varying vec4 vColorParams;
+
+#pragma glslify: snoise = require(./func/snoise.glsl)
+//#pragma glslify: cubicPulse = require(./func/cubicPulse.glsl)
+
+vec3 rotate( vec3 pos, float angle) {
+	float sinAngle = sin(angle);
+	float cosAngle = cos(angle);
+
+	float xNew = pos.x * cosAngle - pos.z * sinAngle;
+	float zNew = pos.x * sinAngle + pos.z * cosAngle;
+
+	return vec3(xNew, pos.y, zNew);
+}
+
+void main() {
+
+	float freq = uSwayParams.x;
+	float amp = uSwayParams.z;
+	float ampHeight = uSwayParams.w;
+	float tubeRadius = uTubeParams.x;
+	float tubeSpread = uTubeParams.y;
+	float tubeYHeight = uTubeParams.z;
+	float tubeYOffset = uTubeParams.w;
+
+	float noise = snoise(vec4((position)*freq, uTime));
+	
+	// position
+	vec3 pos = position * vec3(tubeRadius, 1.0, tubeRadius);
+	pos += (normal+vec3(0.0, ampHeight, 0.0))* (1.0-smoothstep(1.0, 1.5, uv.y)) * noise*amp;
+	//pos += data.yzw * noise*amp;
+	pos.y = pos.y * tubeYHeight + tubeYOffset;
+	pos = rotate(pos, center.w);
+	pos += center.xyz * tubeSpread;
+
+	// pull to infinity
+	pos.y *= (1.0 + uInfiniteScalar * step(0.0, pos.y));
+
+	vec3 posWorld = (modelMatrix * vec4( pos, 1.0 )).xyz;
+
+	// color
+	vec3 colorTint = uColorTint.xyz;
+	colorTint.xyz += sin(data.w*100.0 + uTime*20.0);
+
+	// alpha fade
+	float fadeFreq = uColorParams.z;
+  	float fadeSpeed = uColorParams.w;
+	float alphaFade = sin(fadeFreq*position.y + fadeSpeed * uTime)*0.5+0.5;
+	//float ringPulse = cubicPulse(uPulsePosZ, 10.0, posWorld.z);
+	//colorTint.xyz += ringPulse * 100.0;
+
+    gl_Position = projectionMatrix * modelViewMatrix * vec4( pos, 1.0 );
+	gl_PointSize = 2.0;
+	vPosBase = position;
+    vTime = uTime;
+	vNormal = normal;
+	vNoise = noise;
+	vPosWorld = posWorld;
+	vUv = uv;
+	vColorTint = vec4(colorTint,alphaFade);
+	vColorParams = uColorParams;
+}
