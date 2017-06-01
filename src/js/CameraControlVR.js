@@ -127,7 +127,7 @@ function initStatsVR() {
 
             var pose = frameData.pose;
             elemStats.innerHTML += "<strong>HMD</strong>: " + vrDisplay.displayName + "<br/>";
-            elemStats.innerHTML += "<strong>isConnected</strong>: " + vrDisplay.isConnected + "<br/>";
+            //elemStats.innerHTML += "<strong>isConnected</strong>: " + vrDisplay.isConnected + "<br/>";
             elemStats.innerHTML += "<strong>isPresenting</strong>: " + vrDisplay.isPresenting + "<br/>";
             elemStats.innerHTML += "<strong>timeStamp</strong>: " + frameData.timestamp + "<br/>";
 
@@ -168,9 +168,9 @@ function initStatsVR() {
 
 function doResetPoseVR() {
 
-    if (vrDisplay !== null) {
+    /*if (vrDisplay !== null) {
         vrDisplay.resetPose();
-    }
+    }*/
     
     controls.update();
     camera.obj.lookAt(new THREE.Vector3(0.0, 0.0, -1.0));
