@@ -32,3 +32,5 @@ Then,
 
 ## Technologies Used
 three.js, Tone.js, gulp, WebVR UI
+
+* As of 9/11/2018, the WebVR API is no longer supported so some features may not work as intended.
