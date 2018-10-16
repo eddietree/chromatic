@@ -40,22 +40,24 @@ canvas {
 	display: block;
 }
 
-#icons img {
-	width: 10%;
-	min-width: 70px;
-	max-width: 150px;
-}
-
 #iconwebvr img {
 	position: fixed;
 	left: 15px;
 	bottom: 15px;
+
+	width: 20%;
+	min-width: 150px;
+	max-width: 250px;
 }
 
 #iconfunk img {
 	position: fixed;
 	right: 15px;
 	bottom: 15px;
+
+	width: 20%;
+	min-width: 70px;
+	max-width: 150px;
 }
 
 #desc {
