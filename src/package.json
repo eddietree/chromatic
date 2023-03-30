@@ -34,7 +34,7 @@
     "tween.js": "^16.6.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
-    "node-sass": "8.0.0",
-    "@babel/preset-env": "7.20.2"
+    "node-sass": "^8.0.0",
+    "@babel/preset-env": "^7.20.2"
   }
 }
