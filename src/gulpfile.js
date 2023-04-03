@@ -2,14 +2,14 @@ var env = 'debug'; // 'production'
 
 var gulp = require('gulp'),
 	jshint = require('gulp-jshint'),
-	sass = require('gulp-sass'),
+	sass = require('gulp-sass')(require('node-sass')),
 	gutil = require('gulp-util'),
 	//less = require('gulp-less'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
 	browserSync = require('browser-sync'),
-	runSequence = require('run-sequence'),
+	runSequence = require('gulp4-run-sequence'),
 	clean = require('gulp-clean'),
 	browserify = require('browserify'),
 	notify = require("gulp-notify"),
@@ -69,7 +69,8 @@ var onReloadWebsite = function(){
 
 gulp.task('clean', function() {
 	return gulp.src(pathsDst.root, {
-			read: false
+			read: false,
+			allowEmpty: true
 		})
 		.pipe(clean({force: true}));
 });
@@ -97,7 +98,7 @@ gulp.task('build-res', function() {
 gulp.task('build-js', function() {
 
 	var b = browserify({debug:settings.debug, insertGlobals: true});
-	b.transform(babelify, {presets: ["es2015"]} )
+	b.transform(babelify, {presets: ["@babel/preset-env"]} )
 	b.transform(glslify)
 	b.add(pathsSrc.js + "Main.js");
 
@@ -124,7 +125,7 @@ gulp.task('serve', function() {
 		//https: true
 	});
 
-	gulp.watch(pathsSrc.html, ['build-html', onReloadWebsite]);
+	gulp.watch(pathsSrc.html, gulp.parallel('build-html', onReloadWebsite));
 	gulp.watch(pathsSrc.scss, function() {runSequence('build-scss', 'build-html', onReloadWebsite); });
 	gulp.watch(pathsSrc.res, function() {runSequence('build-res', onReloadWebsite); });
 	gulp.watch(pathsSrc.lib, function() {runSequence('build-lib', 'build-html', onReloadWebsite); });
@@ -141,3 +142,4 @@ gulp.task('default', function(callback) {
 		callback
 	);
 });
+

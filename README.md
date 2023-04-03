@@ -12,17 +12,24 @@ Requires a VR HMD and [WebVR friendly browser](https://webvr.info/) in order to 
 
 ### Check out the git repository
 
-Check out the [git repo](https://github.com/eddietree/chromatic/)
+Check out the [git repo](https://github.com/overc1ocker/chromatic/)
+
+`git clone https://github.com/overc1ocker/chromatic`
+
+For the original project (not my fork) 
+
+Original project [git repo](https://github.com/eddietree/chromatic/)
 
 `git clone https://github.com/eddietree/chromatic`
 
 ### How to run
 
-First, make sure you have [nodejs](https://nodejs.org/en/) installed on your machine. 
+First, make sure you have [nodejs](https://nodejs.org/en/) installed on your machine. You also may need to install [gulp](https://gulpjs.com/docs/en/getting-started/quick-start)
 
 Then, 
 * goto folder `src`
-* run the file `setup.sh` and it wil install and run the project
+* run the file `setup.sh` and it will install and run the project
+* To run the project after the first install, use `run.sh`
 
 
 ## Contributors
